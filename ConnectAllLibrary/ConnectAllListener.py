@@ -13,7 +13,7 @@ TESTCASE_NAME_TAG = 'name'
 TESTCASE_TYPE_TAG = 'type'
 TESTCASE_DESCRIPTION_TAG = 'description'
 
-class ConnectALLListener:
+class ConnectAllListener:
     """
         ConnectAllRobotListener class to read the test results and send it to ConnectALL
     """

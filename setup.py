@@ -41,7 +41,7 @@ setup(
     install_requires = REQUIREMENTS,
     package_dir      = {'': 'ConnectAllLibrary'},
     packages         = find_packages('ConnectAllLibrary'),
-    py_modules       = ['ConnectAllRobotListener', 'RestClinet', 'BasicAuthRestClient'],
+    py_modules       = ['ConnectAllListener', 'RestClinet', 'BasicAuthRestClient'],
     package_data     ={
         'ConnectAllLibrary':
             ['*.pyi']
