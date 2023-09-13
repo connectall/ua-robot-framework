@@ -26,7 +26,7 @@ with open(join(CURDIR, 'requirements.txt')) as f:
     REQUIREMENTS = f.read().splitlines()
 
 setup(
-    name             = 'robotframework-connectall-library',
+    name             = 'robot-connectall',
     version          = '0.0.1',
     description      = 'ConnectALL library for Robot Framework',
     long_description = 'ConnectALL library for Robot Framework',
