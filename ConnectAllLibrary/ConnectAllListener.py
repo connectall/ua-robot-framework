@@ -27,6 +27,7 @@ class ConnectAllListener:
     def end_test(self,name,attrs):
         # Capture the dynamic attributes like test name, status, message
         log.info(f"attrs: {str(attrs)}")
+        test_id = attrs['id']
         test_name = attrs['longname']
         test_status = attrs['status']
         test_message = attrs['message']
@@ -37,7 +38,7 @@ class ConnectAllListener:
         description = dynamic_attributes[TESTCASE_DESCRIPTION_TAG]
 
         # Create a TestResult object
-        test_result = TestResult(test_name,test_status,test_message,testCaseId=caseid,testCaseType=type,testCaseDescription=description)
+        test_result = TestResult(test_id,test_name,test_status,test_message,testCaseId=caseid,testCaseType=type,testCaseDescription=description)
         self.postTestResult(test_result)
 
     # a method to post the test result to ConnectALL
@@ -115,7 +116,8 @@ class TestResult:
     """
         TestResult datastructure to hold the test status
     """
-    def __init__(self,name,status,message,testCaseId=None,testCaseType=None,testCaseDescription=None):
+    def __init__(self,id,name,status,message,testCaseId=None,testCaseType=None,testCaseDescription=None):
+        self.id = id
         self.name = name
         self.runStatus = status
         self.message = message
@@ -132,7 +134,7 @@ class TestResult:
         """
             Create a unique id for the test result as a concatenation of test case id and current timestamp
         """
-        return f"{self.testCaseId}_{str(self.runDateInMillis)}"
+        return f"{self.id}_{self.testCaseId}_{str(self.runDateInMillis.timestamp())}"
     
     def createRunDate(self):
         """
