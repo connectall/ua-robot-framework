@@ -12,41 +12,45 @@ pip install git+https://github.com/connectall/robotframework-connectall-library.
 
 ## Documentation
 
-See library documentation on [GitHub](https://github.com/connectall/robotframework-connectall-library/tree/main/docs)
+See library documentation on [GitHub](https://github.com/connectall/robotframework-connectall-library/tree/main/README.md)
 
-## Library Usage
+## Usage
 
-1. Import ConnectAllLibrary
+### Setup
+
+1. Create a robot test case with the following tags that will be used as dynamic paraters 
+* caseId - testcaseId in the test management system
+* type - denotes the type of testcase valid values `['Functional','Regression','Performance','Acceptance']`
+* name - testcase name custom name other than the original name
+* description - details about the testcase
 
    ```robot
-   *** Settings ***
-   Library    ConnectAllLibrary    url=http:\\server    user=user@domain.com    api_key=key_here    project=My Project    plan=Test Plan    run_name=MyDailyRun    config={'OS':'Windows', 'Browser':'Chrome'}    prefix=C
-
+    *** Test Case ***
+    Test Case 1
+        [Tags]    caseId=T12345     type=Functional     name="Test Case 1"    description="Test case 1 long description"     
+        Should Be Equal    RobotShould Be EqualShould Be EqualShould Be Equal    framework
    ```
 
-2. Mark Robot Framework tests with tag containing test case ID. Case IDs are the ones that are unique correlation-id test management system. They looks like the follofing C# (e.g. T12345).
+2. Create a `config.toml` configuration file for ConnectALL settings
+    ```robot
+    # config.toml - ConnectALL Configuration settings
+
+    [core]
+    # ConnectALL POST Record endpoint ex: http://localhost:8090
+    url = http://post-service.connectall.broadcom.com
+    username = admin
+    password = welcome
+    apiKey = abcdefgh-1234-5678-90123-ijklmnopqrst
+
+    [automation]
+    name = RobotRally
+    ```
 
 
-## Examples
+### Execution
 
-### Single tag example
+To report the results of the your robot tests back to your test management system execute the tests using `ConnectAllListener`
 
-```robotframework
-*** Test Cases ***
-Test With Test Rail tag
-    [Tags]    C1    dummy    owner-johndoe
-    Log    Hello, world!
+```sh
+$ robot --listener ConnectAllListener:configFile=config.toml test/FirstSuite.robot
 ```
-
-### Multiple tags example
-
-```robotframework
-*** Test Cases ***
-Test With Test Rail tag
-    [Tags]    C1    C2    C45233    dummy    owner-johndoe
-    Log    Hello, world!
-```
-
-## Usage with CI systems
-
-// TODO

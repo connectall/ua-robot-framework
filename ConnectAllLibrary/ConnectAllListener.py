@@ -12,6 +12,7 @@ TESTCASE_ID_TAG = 'caseId'
 TESTCASE_NAME_TAG = 'name'
 TESTCASE_TYPE_TAG = 'type'
 TESTCASE_DESCRIPTION_TAG = 'description'
+CONNECTALL_DATE_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
 
 class ConnectAllListener:
     """
@@ -141,5 +142,5 @@ class TestResult:
             Formats the runDate to yyyy-MM-dd'T'HH:mm:ss.SSS
         """
         # format the runDate to yyyy-MM-dd'T'HH:mm:ss.SSS
-        return self.runDateInMillis.strftime('%Y-%m-%dT%H:%M:%SZ')
+        return self.runDateInMillis.strftime(CONNECTALL_DATE_FORMAT)
     
