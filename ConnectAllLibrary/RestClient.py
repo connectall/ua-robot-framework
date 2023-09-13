@@ -2,6 +2,7 @@
 
 import logging as log
 import json
+import configparser
 
 class RestClient:
     """
@@ -34,4 +35,29 @@ class RestClient:
         """
         with open(self.CONFIG_LOCATION) as json_file:
             data = json.load(json_file)
+            # convert data to dictionary
             return data
+        
+    def loadConfigProperties(self, configFile):
+        """
+            Load the configuration from the configFile
+        """
+        # load config from file using configparser 
+        config = configparser.ConfigParser()
+        config.read(configFile)
+        # convert config to dictionary
+        self.config_dict = {s:dict(config.items(s)) for s in config.sections()}
+        return self.config_dict
+    
+    def connectAllApiKey(self):
+        """
+            Get the ConnectALL API Key from the config
+        """
+        return self.config['core']['apikey']
+    
+    def automationName(self):
+        """
+            Get the Automation Name from the config
+        """
+        return self.config['automation']['name']
+

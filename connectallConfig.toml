@@ -1,0 +1,10 @@
+# connectallConfig.toml
+
+[core]
+url = http://10.253.137.224:8090
+username = admin
+password = welcome
+apiKey = bd436f79-3698-4618-9321-77bf4eb4d36a
+
+[automation]
+name = PostmanRally

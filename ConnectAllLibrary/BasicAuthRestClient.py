@@ -9,16 +9,21 @@ from RestClient import RestClient
 
 class BasicAuthRestClient(RestClient):
 
-    def __init__(self) -> None:
+    def __init__(self,configFile = None) -> None:
         """
             Init function for the RestClient, will load the configuration from the ConnectAllConfig.txt file
         """
         self.REST_AUTH_TYPE = "Basic"
-        self.config = self.loadConfig()
-        self.url = self.config['url']
-        self.username = self.config['username']
-        self.password = self.config['password']
-        self.apiKey = self.config['apiKey']
+        self.configFile = configFile
+        # if configFile is not None then call loadConfigProperties else call loadConfig
+        if configFile is not None:
+            self.config = self.loadConfigProperties(configFile)
+        else:
+            self.config = self.loadConfig()
+        self.url = self.config['core']['url']
+        self.username = self.config['core']['username']
+        self.password = self.config['core']['password']
+        self.apiKey = self.config['core']['apikey']
                 
     def formattedResourceUrl(self, resourceUrl):
         """
