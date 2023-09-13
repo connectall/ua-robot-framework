@@ -26,11 +26,12 @@ class ConnectAllListener:
     # a method to capture the end of test execution
     def end_test(self,name,attrs):
         # Capture the dynamic attributes like test name, status, message
+        log.info(f"attrs: {str(attrs)}")
         test_name = attrs['longname']
         test_status = attrs['status']
         test_message = attrs['message']
-        
-        dynamic_attributes = self.parseTagAttributes(self.attrs['tags'])
+        # Parse the tags to get the dynamic attributes
+        dynamic_attributes = self.parseTagAttributes(attrs['tags'])
         caseid = dynamic_attributes[TESTCASE_ID_TAG]
         type = dynamic_attributes[TESTCASE_TYPE_TAG]
         description = dynamic_attributes[TESTCASE_DESCRIPTION_TAG]
