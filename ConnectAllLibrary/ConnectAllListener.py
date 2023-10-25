@@ -9,6 +9,7 @@ from typing import Any, Dict, List, Optional
 from robot.api import logger as log
 
 TESTCASE_ID_TAG = 'caseId'
+TESTSET_ID_TAG = 'setId'
 TESTCASE_NAME_TAG = 'name'
 TESTCASE_TYPE_TAG = 'type'
 TESTCASE_DESCRIPTION_TAG = 'description'
@@ -35,11 +36,12 @@ class ConnectAllListener:
         # Parse the tags to get the dynamic attributes
         dynamic_attributes = self.parseTagAttributes(attrs['tags'])
         caseid = dynamic_attributes[TESTCASE_ID_TAG]
+        setid = dynamic_attributes[TESTSET_ID_TAG]
         type = dynamic_attributes[TESTCASE_TYPE_TAG]
         description = dynamic_attributes[TESTCASE_DESCRIPTION_TAG]
 
         # Create a TestResult object
-        test_result = TestResult(test_id,test_name,test_status,test_message,testCaseId=caseid,testCaseType=type,testCaseDescription=description)
+        test_result = TestResult(test_id,test_name,test_status,test_message,testCaseId=caseid,testSetId=setid,testCaseType=type,testCaseDescription=description)
         self.postTestResult(test_result)
 
     # a method to post the test result to ConnectALL
@@ -83,6 +85,7 @@ class ConnectAllListener:
                 "message": result.message,
                 "testCaseName": result.name,
                 "testCaseId": result.testCaseId,
+                "testSetId": result.testSetId,
                 "testCaseType": result.testCaseType,
                 "testCaseDescription": result.testCaseDescription
             }
@@ -117,12 +120,13 @@ class TestResult:
     """
         TestResult datastructure to hold the test status
     """
-    def __init__(self,id,name,status,message,testCaseId=None,testCaseType=None,testCaseDescription=None):
+    def __init__(self,id,name,status,message,testCaseId=None,testSetId=None,testCaseType=None,testCaseDescription=None):
         self.id = id
         self.name = name
         self.runStatus = status
         self.message = message
         self.testCaseId = testCaseId
+        self.testSetId = testSetId
         self.testCaseType = testCaseType
         self.testCaseDescription = testCaseDescription
         self.runDateInMillis = datetime.datetime.now()

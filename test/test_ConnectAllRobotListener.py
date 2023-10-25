@@ -6,7 +6,7 @@ from ConnectAllListener import TestResult as Result
 
 def test_parseTagAttributes():
     connectAllListener = ConnectAllListener("connectallConfig.toml")
-    tags = ["caseId=T12345", "type=Fuctional", "description=Test case 1 long description", "name=Test Case 1"]
+    tags = ["caseId=T12345", "setId=TS45678", "type=Fuctional", "description=Test case 1 long description", "name=Test Case 1"]
     attributes = connectAllListener.parseTagAttributes(tags)
     assert attributes['caseId'] == "T12345"
     assert attributes['type'] == "Fuctional"
@@ -15,7 +15,7 @@ def test_parseTagAttributes():
 
 def test_postTestResult():
     connectAllListener = ConnectAllListener("connectallConfig.toml")
-    result = Result("Test Case 1", "PASS", "Test Case 1 passed", testCaseId="T12345", testCaseType="Functional", testCaseDescription="Test case 1 long description")
+    result = Result("Test Case 1", "setId=TS45678", "PASS", "Test Case 1 passed", testCaseId="T12345", testCaseType="Functional", testCaseDescription="Test case 1 long description")
     response = connectAllListener.postTestResult(result)
     log.info (f"Response: {str(response.json())}")
     assert response.status_code == 201
