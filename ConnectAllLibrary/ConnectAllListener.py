@@ -103,7 +103,7 @@ class ConnectAllListener:
             Dict with attributes.
         """
         attributes = dict()
-        matchers = [TESTCASE_ID_TAG, TESTCASE_NAME_TAG, TESTCASE_TYPE_TAG, TESTCASE_DESCRIPTION_TAG]
+        matchers = [TESTCASE_ID_TAG, TESTSET_ID_TAG, TESTCASE_NAME_TAG, TESTCASE_TYPE_TAG, TESTCASE_DESCRIPTION_TAG]
         for matcher in matchers:
             for tag in tags:
                 match = re.match(matcher, tag)
