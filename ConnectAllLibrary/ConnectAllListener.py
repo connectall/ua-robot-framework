@@ -61,8 +61,7 @@ class ConnectAllListener:
 
         # Post the payload to ConnectALL
         response = self.client.doPost(_connectallPostRecordResource, payload)
-        log.info(f"Response status code: {response.status_code}" )
-
+        
         # Check if the request was successful (200 status code)
         # Check for all success codes
         if response!= None and response.status_code >= 200 and response.status_code < 300:
