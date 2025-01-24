@@ -48,14 +48,14 @@ class BasicAuthRestClient(RestClient):
         try:
             # Make a GET request to the API endpoint
             response = session.get(self.formattedResourceUrl(resourceUrl))
-            log.info(f"Request failed with status code: {response}" )
+            log.debug(f"Request completed with response: {response}" )
+            log.debug(f"Response status code: {response.status_code}" )
 
             # Check if the request was successful (200 status code)
             if response!= None and response.status_code == 200:
                 data = response.json()
                 # Do something with the response data
-            else:
-                log.error(f"Request failed with status code: {response.status_code}" )
+                
             # return the response object back to the caller
             return response
         except Exception as e:
@@ -74,14 +74,14 @@ class BasicAuthRestClient(RestClient):
         try:
             # Make a POST request to the API endpoint
             response = session.post(self.formattedResourceUrl(resourceUrl), json=payload)
+            log.debug(f"Request completed with response: {response}" )
+            log.debug(f"Response status code: {response.status_code}" )
 
             # Check if the request was successful (200 status code)
             if response.status_code == 200:
                 data = response.json()
                 log.debug(f"Response data: {str(data)}" )
                 return data
-            else:
-                log.error(f"Request failed with status code: {response.status_code}" )
             
             # return the response back to the caller
             return response
