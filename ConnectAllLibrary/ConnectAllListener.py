@@ -64,7 +64,7 @@ class ConnectAllListener:
         
         # Check if the request was successful (200 status code)
         # Check for all success codes
-        if response!= None and response.status_code >= 200 and response.status_code < 300:
+        if response!= None and 200 <= response.status_code < 300:
             data = response.json()
             log.debug(f"Response data: {str(data)}" )
         else:
