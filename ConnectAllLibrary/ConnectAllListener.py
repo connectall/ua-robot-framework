@@ -61,12 +61,12 @@ class ConnectAllListener:
 
         # Post the payload to ConnectALL
         response = self.client.doPost(_connectallPostRecordResource, payload)
-        log.info(f"Request failed with status code: {response.status_code}" )
-
+        
         # Check if the request was successful (200 status code)
-        if response!= None and response.status_code == 201:
+        # Check for all success codes
+        if response!= None and 200 <= response.status_code < 300:
             data = response.json()
-            log.info(f"Response data: {str(data)}" )
+            log.debug(f"Response data: {str(data)}" )
         else:
             log.error(f"Request failed with status code: {response.status_code} with {str(response.json())}" )
         # return the response object back to the caller
