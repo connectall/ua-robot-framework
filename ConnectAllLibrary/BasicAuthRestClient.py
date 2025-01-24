@@ -51,10 +51,9 @@ class BasicAuthRestClient(RestClient):
             log.info(f"Request failed with status code: {response}" )
 
             # Check if the request was successful (200 status code)
-            # Check for all success codes
-            if response!= None and response.status_code >= 200 and response.status_code < 300:
+            if response!= None and response.status_code == 200:
                 data = response.json()
-                log.debug(f"Response data: {str(data)}" )
+                # Do something with the response data
             else:
                 log.error(f"Request failed with status code: {response.status_code}" )
             # return the response object back to the caller
